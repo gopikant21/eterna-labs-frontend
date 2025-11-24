@@ -60,7 +60,7 @@ export const TokenCard = memo(({ token }: TokenCardProps) => {
   };
 
   return (
-    <div className="bg-slate-900/50 border border-slate-800 hover:border-slate-700 hover:bg-slate-900/70 transition-all duration-300 cursor-pointer p-2 hover:shadow-lg hover:shadow-slate-900/50 group">
+    <div className="bg-black/80 border border-gray-800/50 hover:bg-black/95  cursor-pointer p-2 backdrop-blur-sm group">
       <div className="flex items-center gap-3">
         {/* Left avatar */}
         <div className="relative">
@@ -201,11 +201,11 @@ export const TokenCard = memo(({ token }: TokenCardProps) => {
 
               <div className="flex items-center gap-1 text-xs text-slate-500">
                 <span className="text-slate-400">F</span>
-                <div className="flex flex-col gap-0.5">
-                  <div className="w-4 h-0.5 bg-gradient-to-r from-slate-500 to-slate-600 rounded-full"></div>
-                  <div className="w-3 h-0.5 bg-gradient-to-r from-cyan-400 to-blue-500 rounded-full"></div>
-                  <div className="w-4 h-0.5 bg-gradient-to-r from-blue-500 to-purple-600 rounded-full"></div>
-                </div>
+                <img
+                  src="/icons/solana-icon.svg"
+                  alt="Solana"
+                  className="w-3 h-3 object-contain"
+                />
                 <Tooltip>
                   <TooltipTrigger>
                     <span className="text-white font-medium hover:text-cyan-400 transition-colors duration-200 cursor-pointer hover:bg-slate-800/50 rounded px-1 py-0.5">

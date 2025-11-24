@@ -101,12 +101,12 @@ export default function TokenTable() {
   }
 
   return (
-    <div className="h-full flex flex-col border border-white/10 rounded-lg">
+    <div className="h-full flex flex-col bg-black/80 backdrop-blur-sm border border-gray-800/50 rounded-lg">
       <div className="flex-shrink-0">
         <TokenTableHeader />
       </div>
 
-      <div className="flex-1 grid grid-cols-1 lg:grid-cols-3 border-t border-white/10 min-h-0">
+      <div className="flex-1 grid grid-cols-1 lg:grid-cols-3 border-t border-gray-700/50 min-h-0">
         <TokenColumn
           title="New Pairs"
           tokens={newPairs}
