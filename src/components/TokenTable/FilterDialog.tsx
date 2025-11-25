@@ -11,7 +11,6 @@ import {
 } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
 import { NumberInput } from "@/components/ui/number-input";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import {
   FilterState,
   DEFAULT_FILTER_STATE,
@@ -349,157 +348,135 @@ export function FilterDialog({
           </DialogDescription>
         </DialogHeader>
 
-        <Tabs defaultValue="market" className="w-full">
-          <TabsList className="grid w-full grid-cols-4 bg-slate-900/50 border border-slate-700">
-            <TabsTrigger
-              value="market"
-              className="text-slate-300 data-[state=active]:bg-slate-700 data-[state=active]:text-slate-100"
-            >
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          {/* Market Data */}
+          <div className="space-y-4">
+            <h3 className="text-lg font-medium text-slate-100 border-b border-slate-700 pb-2">
               Market Data
-            </TabsTrigger>
-            <TabsTrigger
-              value="community"
-              className="text-slate-300 data-[state=active]:bg-slate-700 data-[state=active]:text-slate-100"
-            >
-              Community
-            </TabsTrigger>
-            <TabsTrigger
-              value="risk"
-              className="text-slate-300 data-[state=active]:bg-slate-700 data-[state=active]:text-slate-100"
-            >
+            </h3>
+            <RangeInput
+              label="Market Cap"
+              value={localFilters.marketCapRange}
+              onChange={updateMarketCapRange}
+              placeholder={{ min: "Min Market Cap", max: "Max Market Cap" }}
+            />
+            <RangeInput
+              label="24h Volume"
+              value={localFilters.volumeRange}
+              onChange={updateVolumeRange}
+              placeholder={{ min: "Min Volume", max: "Max Volume" }}
+            />
+            <RangeInput
+              label="Price"
+              value={localFilters.priceRange}
+              onChange={updatePriceRange}
+              placeholder={{ min: "Min Price", max: "Max Price" }}
+            />
+            <RangeInput
+              label="24h Price Change (%)"
+              value={localFilters.priceChangeRange}
+              onChange={updatePriceChangeRange}
+              placeholder={{ min: "Min Change", max: "Max Change" }}
+            />
+          </div>
+
+          {/* Community & Activity */}
+          <div className="space-y-4">
+            <h3 className="text-lg font-medium text-slate-100 border-b border-slate-700 pb-2">
+              Community & Activity
+            </h3>
+            <RangeInput
+              label="Holders"
+              value={localFilters.holdersRange}
+              onChange={updateHoldersRange}
+              placeholder={{ min: "Min Holders", max: "Max Holders" }}
+            />
+            <RangeInput
+              label="Pro Traders"
+              value={localFilters.proTradersRange}
+              onChange={updateProTradersRange}
+              placeholder={{ min: "Min Pro Traders", max: "Max Pro Traders" }}
+            />
+            <RangeInput
+              label="KOLs"
+              value={localFilters.kolsRange}
+              onChange={updateKolsRange}
+              placeholder={{ min: "Min KOLs", max: "Max KOLs" }}
+            />
+            <RangeInput
+              label="Transactions"
+              value={localFilters.transactionsRange}
+              onChange={updateTransactionsRange}
+              placeholder={{
+                min: "Min Transactions",
+                max: "Max Transactions",
+              }}
+            />
+            <RangeInput
+              label="Global Fees"
+              value={localFilters.globalFeesRange}
+              onChange={updateGlobalFeesRange}
+              placeholder={{ min: "Min Fees", max: "Max Fees" }}
+            />
+          </div>
+
+          {/* Risk & Holdings */}
+          <div className="space-y-4">
+            <h3 className="text-lg font-medium text-slate-100 border-b border-slate-700 pb-2">
               Risk & Holdings
-            </TabsTrigger>
-            <TabsTrigger
-              value="general"
-              className="text-slate-300 data-[state=active]:bg-slate-700 data-[state=active]:text-slate-100"
-            >
-              General
-            </TabsTrigger>
-          </TabsList>
+            </h3>
+            <RangeInput
+              label="Bonding"
+              value={localFilters.bondingRange}
+              onChange={updateBondingRange}
+              placeholder={{ min: "Min Bonding", max: "Max Bonding" }}
+            />
+            <RangeInput
+              label="Sniper Holding (%)"
+              value={localFilters.sniperHoldingRange}
+              onChange={updateSniperHoldingRange}
+              placeholder={{ min: "Min %", max: "Max %" }}
+            />
+            <RangeInput
+              label="Insiders Holding (%)"
+              value={localFilters.insidersHoldingRange}
+              onChange={updateInsidersHoldingRange}
+              placeholder={{ min: "Min %", max: "Max %" }}
+            />
+            <RangeInput
+              label="Bundle Holding (%)"
+              value={localFilters.bundleHoldingRange}
+              onChange={updateBundleHoldingRange}
+              placeholder={{ min: "Min %", max: "Max %" }}
+            />
+            <RangeInput
+              label="Dev Migrations"
+              value={localFilters.devMigrationsRange}
+              onChange={updateDevMigrationsRange}
+              placeholder={{ min: "Min Migrations", max: "Max Migrations" }}
+            />
+            <RangeInput
+              label="Dev Created"
+              value={localFilters.devCreatedRange}
+              onChange={updateDevCreatedRange}
+              placeholder={{ min: "Min Created", max: "Max Created" }}
+            />
+          </div>
+        </div>
 
-          <TabsContent value="market" className="mt-6">
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-              <RangeInput
-                label="Market Cap"
-                value={localFilters.marketCapRange}
-                onChange={updateMarketCapRange}
-                placeholder={{ min: "Min Market Cap", max: "Max Market Cap" }}
-              />
-              <RangeInput
-                label="24h Volume"
-                value={localFilters.volumeRange}
-                onChange={updateVolumeRange}
-                placeholder={{ min: "Min Volume", max: "Max Volume" }}
-              />
-              <RangeInput
-                label="Price"
-                value={localFilters.priceRange}
-                onChange={updatePriceRange}
-                placeholder={{ min: "Min Price", max: "Max Price" }}
-              />
-              <RangeInput
-                label="24h Price Change (%)"
-                value={localFilters.priceChangeRange}
-                onChange={updatePriceChangeRange}
-                placeholder={{ min: "Min Change", max: "Max Change" }}
-              />
-            </div>
-          </TabsContent>
-
-          <TabsContent value="community" className="mt-6">
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-              <RangeInput
-                label="Holders"
-                value={localFilters.holdersRange}
-                onChange={updateHoldersRange}
-                placeholder={{ min: "Min Holders", max: "Max Holders" }}
-              />
-              <RangeInput
-                label="Pro Traders"
-                value={localFilters.proTradersRange}
-                onChange={updateProTradersRange}
-                placeholder={{ min: "Min Pro Traders", max: "Max Pro Traders" }}
-              />
-              <RangeInput
-                label="KOLs"
-                value={localFilters.kolsRange}
-                onChange={updateKolsRange}
-                placeholder={{ min: "Min KOLs", max: "Max KOLs" }}
-              />
-              <RangeInput
-                label="Transactions"
-                value={localFilters.transactionsRange}
-                onChange={updateTransactionsRange}
-                placeholder={{
-                  min: "Min Transactions",
-                  max: "Max Transactions",
-                }}
-              />
-              <RangeInput
-                label="Global Fees"
-                value={localFilters.globalFeesRange}
-                onChange={updateGlobalFeesRange}
-                placeholder={{ min: "Min Fees", max: "Max Fees" }}
-              />
-            </div>
-          </TabsContent>
-
-          <TabsContent value="risk" className="mt-6">
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-              <RangeInput
-                label="Bonding"
-                value={localFilters.bondingRange}
-                onChange={updateBondingRange}
-                placeholder={{ min: "Min Bonding", max: "Max Bonding" }}
-              />
-              <RangeInput
-                label="Sniper Holding (%)"
-                value={localFilters.sniperHoldingRange}
-                onChange={updateSniperHoldingRange}
-                placeholder={{ min: "Min %", max: "Max %" }}
-              />
-              <RangeInput
-                label="Insiders Holding (%)"
-                value={localFilters.insidersHoldingRange}
-                onChange={updateInsidersHoldingRange}
-                placeholder={{ min: "Min %", max: "Max %" }}
-              />
-              <RangeInput
-                label="Bundle Holding (%)"
-                value={localFilters.bundleHoldingRange}
-                onChange={updateBundleHoldingRange}
-                placeholder={{ min: "Min %", max: "Max %" }}
-              />
-              <RangeInput
-                label="Dev Migrations"
-                value={localFilters.devMigrationsRange}
-                onChange={updateDevMigrationsRange}
-                placeholder={{ min: "Min Migrations", max: "Max Migrations" }}
-              />
-              <RangeInput
-                label="Dev Created"
-                value={localFilters.devCreatedRange}
-                onChange={updateDevCreatedRange}
-                placeholder={{ min: "Min Created", max: "Max Created" }}
-              />
-            </div>
-          </TabsContent>
-
-          <TabsContent value="general" className="mt-6">
-            <div className="space-y-6">
-              <CategorySelector
-                selectedCategories={localFilters.categories}
-                onChange={updateCategories}
-              />
-              <SortSelector
-                sortBy={localFilters.sortBy}
-                sortOrder={localFilters.sortOrder}
-                onSortByChange={updateSortBy}
-                onSortOrderChange={updateSortOrder}
-              />
-            </div>
-          </TabsContent>
-        </Tabs>
+        {/* Categories and Sort Section */}
+        <div className="mt-8 pt-6 border-t border-slate-700 space-y-6">
+          <CategorySelector
+            selectedCategories={localFilters.categories}
+            onChange={updateCategories}
+          />
+          <SortSelector
+            sortBy={localFilters.sortBy}
+            sortOrder={localFilters.sortOrder}
+            onSortByChange={updateSortBy}
+            onSortOrderChange={updateSortOrder}
+          />
+        </div>
 
         <DialogFooter className="pt-6 border-t border-slate-800">
           <div className="flex justify-between w-full">
