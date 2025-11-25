@@ -5,12 +5,14 @@ import { TokenCard } from "./TokenCard";
 import { P1Component } from "./P1Component";
 import { P2Component } from "./P2Component";
 import { P3Component } from "./P3Component";
+import { FilterButton } from "./FilterButton";
+import { useTokenFilters } from "@/hooks/useTokenFilters";
 import {
   Tooltip,
   TooltipContent,
   TooltipTrigger,
 } from "@/components/ui/tooltip";
-import { SlidersHorizontal, Zap } from "lucide-react";
+import { Zap } from "lucide-react";
 
 interface TokenColumnProps {
   title: string;
@@ -19,6 +21,14 @@ interface TokenColumnProps {
 }
 
 export function TokenColumn({ title, tokens, totalCount }: TokenColumnProps) {
+  const {
+    filteredTokens,
+    filterState,
+    hasActiveFilters,
+    handleApplyFilters,
+    handleResetFilters,
+  } = useTokenFilters(tokens);
+
   return (
     <div className="flex flex-col h-full border border-white/10 last:border-r-0 overflow-y-auto">
       <div className="flex items-center justify-between p-2 flex-shrink-0">
@@ -27,7 +37,7 @@ export function TokenColumn({ title, tokens, totalCount }: TokenColumnProps) {
         <div className="flex items-center gap-4">
           <div className="flex items-center space-x-2 border border-slate-400 rounded-full text-slate-400 px-3 py-1">
             <Zap className="w-4 h-4" />
-            <span className="text-sm font-medium">{totalCount}</span>
+            <span className="text-sm font-medium">{filteredTokens.length}</span>
             <img
               src="/icons/solana-icon.svg"
               alt="Solana"
@@ -39,18 +49,27 @@ export function TokenColumn({ title, tokens, totalCount }: TokenColumnProps) {
             <P3Component />
           </div>
 
-          <SlidersHorizontal className="w-5 h-5 text-slate-400" />
+          <FilterButton
+            onApplyFilters={handleApplyFilters}
+            onResetFilters={handleResetFilters}
+            currentFilters={filterState}
+            hasActiveFilters={hasActiveFilters}
+          />
         </div>
       </div>
 
       <div className="flex-1 overflow-y-auto min-h-0 [&::-webkit-scrollbar]:w-2 [&::-webkit-scrollbar-track]:bg-transparent [&::-webkit-scrollbar-thumb]:bg-slate-600/50 [&::-webkit-scrollbar-thumb]:rounded-full [&::-webkit-scrollbar-thumb]:border-2 [&::-webkit-scrollbar-thumb]:border-transparent hover:[&::-webkit-scrollbar-thumb]:bg-slate-500/70">
         <div className="">
-          {tokens.length === 0 ? (
+          {filteredTokens.length === 0 ? (
             <div className="rounded-lg border border-dashed border-muted p-8 text-center">
-              <p className="text-muted-foreground">No tokens found</p>
+              <p className="text-muted-foreground">
+                {hasActiveFilters
+                  ? "No tokens match the current filters"
+                  : "No tokens found"}
+              </p>
             </div>
           ) : (
-            tokens.map((token) => {
+            filteredTokens.map((token) => {
               const bondingValue = token.bonding ?? 0;
 
               // Determine text color based on bonding value
