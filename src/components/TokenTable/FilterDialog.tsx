@@ -338,7 +338,7 @@ export function FilterDialog({
 
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
-      <DialogContent className="max-w-4xl max-h-[90vh] overflow-y-auto bg-slate-950 border-slate-800">
+      <DialogContent className="max-w-4xl max-h-[80vh] overflow-y-auto bg-slate-950 border-slate-800">
         <DialogHeader className="pb-4">
           <DialogTitle className="text-xl font-semibold text-slate-100">
             Filter Tokens
