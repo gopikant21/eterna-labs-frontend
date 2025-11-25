@@ -1,4 +1,4 @@
-import TokenTable from "@/components/TokenTable";
+import {TokenTable} from "@/components/TokenTable";
 
 export default function Home() {
   return (
